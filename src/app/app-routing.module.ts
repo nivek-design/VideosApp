@@ -5,6 +5,18 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+  },
+  {
+    path: 'pranto-maldito',
+    loadChildren: () => import('./filmes/pranto-maldito/pranto-maldito.module').then( m => m.PrantoMalditoPageModule)
+  },
+  {
+    path: 'sem-conexao',
+    loadChildren: () => import('./filmes/sem-conexao/sem-conexao.module').then( m => m.SemConexaoPageModule)
+  },
+  {
+    path: 'dados-filme',
+    loadChildren: () => import('./dados-filme/dados-filme.module').then( m => m.DadosFilmePageModule)
   }
 ];
 @NgModule({

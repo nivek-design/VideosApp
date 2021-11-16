@@ -1,7 +1,9 @@
-import { IFilme } from '../models/IFilme.model';
+import { IFilme } from './../models/IFilme.model';
+import { DadosService } from './../services/dados.service';
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,7 +21,8 @@ export class Tab1Page {
       duracao:'150 minutos',
       classificacao: 29,
       cartaz:'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/50SJI2Cbs4m9vhtrd9TVFEIX9n4.jpg',
-      genero: ['terror','muito terro']
+      genero: ['terror','muito terro'],
+      pagina:'/pranto-maldito'
     },
     {
       nome:'Sem Conexão: Parte 2 (2021) ',
@@ -27,14 +30,25 @@ export class Tab1Page {
       duracao:'1h 36m ',
       classificacao: 59,
       cartaz:'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/txp0Wm5MGTYRJopAC015VRanBab.jpg',
-      genero: ['Terror', 'Thriller', 'Comédia']
-
+      genero: ['Terror', 'Thriller', 'Comédia'],
+      pagina:'/sem-conexao'
     }
 
 
   ];
 
-  constructor(public alertController: AlertController, public toastController: ToastController) {}
+  constructor(
+    public alertController: AlertController,
+    public toastController: ToastController,
+    public dadosService: DadosService,
+    public route: Router) {}
+
+    exibirFilme(filme: IFilme){
+      this.dadosService.guardarDados('filme', filme);
+      this.route.navigateByUrl('/dados-filme');
+    }
+
+
 
   async exibirAlertaFavorito() {
     const alert = await this.alertController.create({
